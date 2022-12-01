@@ -25,7 +25,7 @@ poetry run python -m day01
 ```
 
 ## Progress
-- [ ] Day 01: TBD
+- [X] Day 01: Calorie Counting
 - [ ] Day 02: TBD
 - [ ] Day 03: TBD
 - [ ] Day 04: TBD
