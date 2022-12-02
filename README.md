@@ -26,7 +26,7 @@ poetry run python -m day01
 
 ## Progress
 - [X] Day 01: Calorie Counting
-- [ ] Day 02: TBD
+- [X] Day 02: Rock Paper Scissors
 - [ ] Day 03: TBD
 - [ ] Day 04: TBD
 - [ ] Day 05: TBD
