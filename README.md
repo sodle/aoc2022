@@ -28,7 +28,7 @@ poetry run python -m day01
 - [X] Day 01: Calorie Counting
 - [X] Day 02: Rock Paper Scissors
 - [X] Day 03: Rucksack Reorganization
-- [ ] Day 04: TBD
+- [X] Day 04: Camp Cleanup
 - [ ] Day 05: TBD
 - [ ] Day 06: TBD
 - [ ] Day 07: TBD
