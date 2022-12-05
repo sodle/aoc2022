@@ -1,6 +1,4 @@
-from shared.rucksack import Rucksack
-
-from day03.__main__ import part1, part2
+from day03.__main__ import part1, part2, Rucksack
 
 test_input = [
     Rucksack("vJrwpWtwJgWrhcsFMMfFFhFp"),
