@@ -31,7 +31,7 @@ poetry run python -m day01
 - [X] Day 04: Camp Cleanup
 - [X] Day 05: Supply Stacks
 - [X] Day 06: Tuning Trouble
-- [ ] Day 07: TBD
+- [X] Day 07: No Space Left On Device
 - [ ] Day 08: TBD
 - [ ] Day 09: TBD
 - [ ] Day 10: TBD
