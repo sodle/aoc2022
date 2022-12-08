@@ -32,7 +32,7 @@ poetry run python -m day01
 - [X] Day 05: Supply Stacks
 - [X] Day 06: Tuning Trouble
 - [X] Day 07: No Space Left On Device
-- [ ] Day 08: TBD
+- [X] Day 08: Treetop Tree House
 - [ ] Day 09: TBD
 - [ ] Day 10: TBD
 - [ ] Day 11: TBD
