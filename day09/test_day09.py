@@ -10,4 +10,9 @@ def test_part1():
 
 def test_part2():
     with Path(__file__).parent.joinpath("test_input").joinpath("motions.txt").open() as input_file:
-        assert part2(input_file.readlines()) == 0
+        assert part2(input_file.readlines()) == 1
+
+
+def test_part2_more():
+    with Path(__file__).parent.joinpath("test_input").joinpath("more_motions.txt").open() as input_file:
+        assert part2(input_file.readlines()) == 36

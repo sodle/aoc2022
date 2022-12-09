@@ -33,7 +33,7 @@ poetry run python -m day01
 - [X] Day 06: Tuning Trouble
 - [X] Day 07: No Space Left On Device
 - [X] Day 08: Treetop Tree House
-- [ ] Day 09: TBD
+- [X] Day 09: Rope Bridge
 - [ ] Day 10: TBD
 - [ ] Day 11: TBD
 - [ ] Day 12: TBD
