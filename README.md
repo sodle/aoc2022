@@ -1,7 +1,7 @@
 # Advent of Code 2022, Python
 
 ## Requirements
-- Python 3.10
+- Python 3.9
 - Poetry
 
 ## Install deps
