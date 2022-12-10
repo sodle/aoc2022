@@ -1,53 +1,54 @@
 # Day 10: Cathode-Ray Tube
 from pathlib import Path
 
-from typing import List, Set, Tuple
+from typing import List, Callable
 
 
-def part1(lines: List[str]) -> int:
+def run_program(lines: List[str], on_tick: Callable[[int, int], None]):
     register = 1
     program_counter = 1
 
     adding = False
     addend = 0
 
-    interesting_signals: List[int] = []
+    lines = [line.strip() for line in lines if len(line.strip()) > 0]
 
-    while True:
-        if program_counter in (20, 60, 100, 140, 180, 220):
-            interesting_signals.append(program_counter * register)
+    while len(lines) > 0 or adding:
+        on_tick(register, program_counter)
 
         if adding:
             register += addend
             adding = False
-        elif len(lines) > 0:
-            line = lines.pop(0).strip()
+        else:
+            line = lines.pop(0)
             if line.startswith("addx"):
                 _, addend_str = line.split()
                 adding = True
                 addend = int(addend_str)
-            elif line == "noop":
-                pass
-            else:
-                break
-        else:
-            break
 
         program_counter += 1
+
+
+def part1(lines: List[str]) -> int:
+    interesting_signals: List[int] = []
+
+    def on_tick(register: int, program_counter: int):
+        nonlocal interesting_signals
+
+        if program_counter in (20, 60, 100, 140, 180, 220):
+            interesting_signals.append(program_counter * register)
+
+    run_program(lines, on_tick)
 
     return sum(interesting_signals)
 
 
 def part2(lines: List[str]) -> str:
-    register = 1
-    program_counter = 1
+    raster: str = ""
 
-    adding = False
-    addend = 0
+    def on_tick(register: int, program_counter: int):
+        nonlocal raster
 
-    raster = ""
-
-    while True:
         column = (program_counter - 1) % 40
         if column in range(register - 1, register + 2):
             raster += "#"
@@ -55,26 +56,8 @@ def part2(lines: List[str]) -> str:
             raster += "."
         if column == 39:
             raster += "\n"
-        if program_counter >= 240:
-            break
 
-        if adding:
-            register += addend
-            adding = False
-        elif len(lines) > 0:
-            line = lines.pop(0).strip()
-            if line.startswith("addx"):
-                _, addend_str = line.split()
-                adding = True
-                addend = int(addend_str)
-            elif line == "noop":
-                pass
-            else:
-                break
-        else:
-            break
-
-        program_counter += 1
+    run_program(lines, on_tick)
 
     return raster
 
@@ -84,6 +67,6 @@ if __name__ == "__main__":
     with input_path.open() as input_file:
         input_lines = input_file.readlines()
         print(f"Part 1:\t{part1(input_lines)}")
-    with input_path.open() as input_file:
+
         input_lines = input_file.readlines()
         print(f"Part 2:\n{part2(input_lines)}")
