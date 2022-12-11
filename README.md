@@ -35,7 +35,7 @@ poetry run python -m day01
 - [X] Day 08: Treetop Tree House
 - [X] Day 09: Rope Bridge
 - [X] Day 10: Cathode-Ray Tube
-- [ ] Day 11: TBD
+- [X] Day 11: Monkey in the Middle
 - [ ] Day 12: TBD
 - [ ] Day 13: TBD
 - [ ] Day 14: TBD
