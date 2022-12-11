@@ -1,4 +1,5 @@
 # Day 11: Monkey in the Middle
+import math
 import operator
 from pathlib import Path
 
@@ -17,7 +18,8 @@ class Monkey:
 
     inspect_count: int
 
-    gcd: int = 1
+    # Static property - the product of all the monkeys' "test" values
+    test_product: int = 1
 
     def __init__(self):
         self.inspect_count = 0
@@ -31,12 +33,29 @@ class Monkey:
             operand = self.worry_operand if self.worry_operand is not None else old_worry
             new_worry = self.worry_operator(old_worry, operand)
 
+            # multiplying big numbers is super slow.
+            # since the monkeys only care about divisibility, not magnitude,
+            # we can use a common multiple of their "test" values
+            # to find a smaller "worry" number that has the same divisors.
+            # The easiest common multiple to find is the product of all the values.
+            #
+            # If `x` is divisible by the product `p` of all numbers in set `S`,
+            # then it is divisible by every number in `S`.
+            #
+            # If `x` is not divisible by a number `a` in `S`,
+            # then `x` is "congruent" to `p` with respect to `a`,
+            # meaning, the remainder of `x / p` has all the same divisors as `x` with respect to `S`.
+            #
+            # So, we can use that remainder in place of `x` to make the multiplicands smaller and the operation faster.
+            # This optimization allows us to keep the worry values under 10k for part 1 and under 100k for part 2.
+            # Without it, they quickly exceed 10^(10 million) for part 2.
+            new_worry %= self.test_product
+
             if not anxious:
                 new_worry //= 3
 
             if new_worry % self.test == 0:
                 next_monkey = self.if_true
-                new_worry %= self.gcd
             else:
                 next_monkey = self.if_false
 
@@ -70,7 +89,7 @@ def parse_monkeys(lines):
             current_monkey.worry_operand = None if worry_operand == "old" else int(worry_operand)
         elif line.startswith("Test"):
             current_monkey.test = int(line.split()[-1])
-            Monkey.gcd *= current_monkey.test
+            Monkey.test_product *= current_monkey.test
         elif line.startswith("If true"):
             current_monkey.if_true = int(line.split()[-1])
         elif line.startswith("If false"):
@@ -84,7 +103,7 @@ def parse_monkeys(lines):
 
 
 def part1(lines: list[str]) -> int:
-    Monkey.gcd = 1
+    Monkey.test_product = 1
 
     monkeys = parse_monkeys(lines)
 
@@ -100,7 +119,7 @@ def part1(lines: list[str]) -> int:
 
 
 def part2(lines: list[str]) -> int:
-    Monkey.gcd = 1
+    Monkey.test_product = 1
 
     monkeys = parse_monkeys(lines)
 
