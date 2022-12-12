@@ -36,7 +36,7 @@ poetry run python -m day01
 - [X] Day 09: Rope Bridge
 - [X] Day 10: Cathode-Ray Tube
 - [X] Day 11: Monkey in the Middle
-- [ ] Day 12: TBD
+- [X] Day 12: Hill Climbing Algorithm
 - [ ] Day 13: TBD
 - [ ] Day 14: TBD
 - [ ] Day 15: TBD
