@@ -5,8 +5,7 @@ import json
 from typing import Union, Optional
 
 
-def compare_packets(left: list[Union[int, list]], right: list[Union[int, list]],
-                    is_recursive: bool = False) -> Optional[bool]:
+def compare_packets(left: list[Union[int, list]], right: list[Union[int, list]]) -> Optional[bool]:
     # if left is empty but right isn't, we're definitely in order
     if len(left) == 0 and len(right) > 0:
         return True
@@ -16,6 +15,9 @@ def compare_packets(left: list[Union[int, list]], right: list[Union[int, list]],
             return False
 
         right_value = right[index]
+
+        if left_value == right_value:
+            continue
 
         # both are ints, so just compare them
         if isinstance(left_value, int) and isinstance(right_value, int):
@@ -32,16 +34,12 @@ def compare_packets(left: list[Union[int, list]], right: list[Union[int, list]],
             right_value = [right_value]
 
         if isinstance(left_value, list) and isinstance(right_value, list):
-            compare = compare_packets(left_value, right_value, is_recursive=True)
+            compare = compare_packets(left_value, right_value)
             if compare is not None:
                 return compare
 
-    # if none of the previous checks fail, and we're in a recursive call, return inconclusive.
-    # Otherwise, we're in order!
-    if is_recursive:
-        return None
-    else:
-        return True
+    # if none of the previous checks fail, we're in order!
+    return True
 
 
 def part1(lines: list[str]) -> int:
