@@ -38,7 +38,7 @@ poetry run python -m day01
 - [X] Day 11: Monkey in the Middle
 - [X] Day 12: Hill Climbing Algorithm
 - [X] Day 13: Distress Signal
-- [ ] Day 14: TBD
+- [X] Day 14: Regolith Reservoir
 - [ ] Day 15: TBD
 - [ ] Day 16: TBD
 - [ ] Day 17: TBD
