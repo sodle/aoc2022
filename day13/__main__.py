@@ -1,4 +1,5 @@
 # Day 13: Distress Signal
+import functools
 from pathlib import Path
 import json
 
@@ -42,6 +43,16 @@ def compare_packets(left: list[Union[int, list]], right: list[Union[int, list]])
     return True
 
 
+# shoehorn the "compare_packets" function into legit Python comparator function
+def comparator(left: list, right: list) -> int:
+    if left == right:
+        return 0
+    if compare_packets(left, right):
+        return -1
+    else:
+        return 1
+
+
 def part1(lines: list[str]) -> int:
     ordered_indices = []
     index = 1
@@ -64,7 +75,13 @@ def part1(lines: list[str]) -> int:
 
 
 def part2(lines: list[str]) -> int:
-    return 0
+    lines = [json.loads(line) for line in lines if len(line.strip()) > 0]
+    lines.append([[2]])
+    lines.append([[6]])
+
+    lines.sort(key=functools.cmp_to_key(comparator))
+
+    return (lines.index([[2]]) + 1) * (lines.index([[6]]) + 1)
 
 
 if __name__ == "__main__":
